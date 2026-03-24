@@ -147,8 +147,12 @@ export function EndpointList() {
                   {ep.delay > 0 && (
                     <>
                       <span className="text-xs text-gray-700">•</span>
-                      <span className="text-xs text-gray-600">
-                        {ep.delay}ms delay
+                      <span className={`text-xs flex items-center gap-1 ${
+                        ep.delay <= 200 ? 'text-yellow-500' :
+                        ep.delay <= 1000 ? 'text-orange-500' :
+                        'text-red-500'
+                      }`}>
+                        ⏱ {ep.delay}ms
                       </span>
                     </>
                   )}

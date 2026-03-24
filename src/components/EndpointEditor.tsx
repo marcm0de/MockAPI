@@ -225,6 +225,29 @@ export function EndpointEditor() {
               max={30000}
               className="w-full px-3 py-2 rounded-lg bg-gray-800 dark:bg-gray-800 light:bg-white border border-gray-700 dark:border-gray-700 light:border-gray-300 text-white dark:text-white light:text-gray-900 text-sm focus:outline-none focus:border-emerald-500"
             />
+            <div className="flex flex-wrap gap-1 mt-1.5">
+              {[
+                { label: 'None', value: 0 },
+                { label: 'Fast', value: 200 },
+                { label: 'Slow', value: 1000 },
+                { label: '3G', value: 2000 },
+                { label: 'Timeout', value: 5000 },
+              ].map((preset) => (
+                <button
+                  key={preset.label}
+                  onClick={() =>
+                    updateEndpoint(endpoint.id, { delay: preset.value })
+                  }
+                  className={`px-2 py-0.5 text-[10px] rounded-md border transition-colors ${
+                    endpoint.delay === preset.value
+                      ? 'border-emerald-500/50 bg-emerald-500/20 text-emerald-400'
+                      : 'border-gray-700 dark:border-gray-700 light:border-gray-300 text-gray-500 hover:text-emerald-400 hover:border-emerald-500/30'
+                  }`}
+                >
+                  {preset.label} {preset.value > 0 ? `(${preset.value}ms)` : ''}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -58,6 +58,18 @@ export type FakeDataType =
   | "boolean"
   | "avatar"
   | "company"
-  | "url";
+  | "url"
+  | "creditCard"
+  | "creditCardType"
+  | "color"
+  | "hexColor"
+  | "rgbColor"
+  | "latitude"
+  | "longitude"
+  | "coordinates"
+  | "ipv4"
+  | "ipv6"
+  | "macAddress"
+  | "userAgent";
 
 export type Theme = "dark" | "light";

@@ -43,6 +43,22 @@ const companies = [
   "Hooli", "Pied Piper", "Dunder Mifflin", "Sterling Cooper", "Wonka Industries",
 ];
 
+const colorNames = [
+  "Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Pink", "Teal",
+  "Cyan", "Magenta", "Coral", "Indigo", "Lime", "Amber", "Violet", "Crimson",
+  "Turquoise", "Emerald", "Sapphire", "Gold", "Silver", "Maroon", "Navy", "Olive",
+];
+
+const creditCardTypes = ["Visa", "Mastercard", "American Express", "Discover", "JCB", "Diners Club"];
+
+const userAgents = [
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 Safari/17.0",
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148",
+  "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36",
+  "Mozilla/5.0 (X11; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0",
+];
+
 const loremWords = [
   "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
   "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
@@ -145,6 +161,35 @@ export function generateFakeData(type: FakeDataType, seed?: string): string | nu
       return rand(companies);
     case "url":
       return `https://${rand(["example", "test", "demo", "sample"])}.${rand(["com", "io", "dev", "org"])}/${rand(loremWords)}`;
+    case "creditCard": {
+      const prefix = rand(["4", "5", "37", "6011"]);
+      const len = prefix === "37" ? 15 : 16;
+      let num = prefix;
+      while (num.length < len) num += randInt(0, 9);
+      return num;
+    }
+    case "creditCardType":
+      return rand(creditCardTypes);
+    case "color":
+      return rand(colorNames);
+    case "hexColor":
+      return `#${randInt(0, 16777215).toString(16).padStart(6, "0")}`;
+    case "rgbColor":
+      return `rgb(${randInt(0, 255)}, ${randInt(0, 255)}, ${randInt(0, 255)})`;
+    case "latitude":
+      return parseFloat((Math.random() * 180 - 90).toFixed(6));
+    case "longitude":
+      return parseFloat((Math.random() * 360 - 180).toFixed(6));
+    case "coordinates":
+      return `${(Math.random() * 180 - 90).toFixed(6)}, ${(Math.random() * 360 - 180).toFixed(6)}`;
+    case "ipv4":
+      return `${randInt(1, 255)}.${randInt(0, 255)}.${randInt(0, 255)}.${randInt(1, 254)}`;
+    case "ipv6":
+      return Array.from({ length: 8 }, () => randInt(0, 65535).toString(16).padStart(4, "0")).join(":");
+    case "macAddress":
+      return Array.from({ length: 6 }, () => randInt(0, 255).toString(16).padStart(2, "0")).join(":");
+    case "userAgent":
+      return rand(userAgents);
     default:
       return "";
   }
@@ -203,4 +248,16 @@ export const FAKE_DATA_TYPES: { type: FakeDataType; label: string; example: stri
   { type: "avatar", label: "Avatar URL", example: "https://..." },
   { type: "company", label: "Company", example: "Acme Corp" },
   { type: "url", label: "URL", example: "https://example.com" },
+  { type: "creditCard", label: "Credit Card", example: "4532015112830366" },
+  { type: "creditCardType", label: "Card Type", example: "Visa" },
+  { type: "color", label: "Color Name", example: "Emerald" },
+  { type: "hexColor", label: "Hex Color", example: "#3b82f6" },
+  { type: "rgbColor", label: "RGB Color", example: "rgb(59, 130, 246)" },
+  { type: "latitude", label: "Latitude", example: "40.712776" },
+  { type: "longitude", label: "Longitude", example: "-74.005974" },
+  { type: "coordinates", label: "Coordinates", example: "40.7128, -74.0060" },
+  { type: "ipv4", label: "IPv4 Address", example: "192.168.1.1" },
+  { type: "ipv6", label: "IPv6 Address", example: "2001:0db8:..." },
+  { type: "macAddress", label: "MAC Address", example: "00:1B:44:11:3A:B7" },
+  { type: "userAgent", label: "User Agent", example: "Mozilla/5.0..." },
 ];

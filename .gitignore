@@ -43,3 +43,4 @@ next-env.d.ts
 # MockAPI runtime data
 .mockapi-data.json
 .mockapi-log.json
+dist/

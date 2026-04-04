@@ -115,10 +115,10 @@ export function RequestLog() {
                     selectedLog === entry.id && "bg-gray-800/50 dark:bg-gray-800/50 light:bg-gray-100 border-l-2 border-l-blue-500"
                   )}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <span
                       className={cn(
-                        "text-[10px] font-bold px-1.5 py-0.5 rounded border uppercase",
+                        "text-[10px] font-bold px-2 py-0.5 rounded-md border uppercase shadow-sm",
                         methodColor(entry.method)
                       )}
                     >
@@ -129,26 +129,26 @@ export function RequestLog() {
                     </span>
                     <ArrowRight className="w-3 h-3 text-gray-600 flex-shrink-0" />
                   </div>
-                  <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex items-center gap-2 mt-2">
                     <span
                       className={cn(
-                        "text-[10px] font-medium px-1.5 py-0.5 rounded border",
+                        "text-[10px] font-semibold px-2 py-0.5 rounded-md border",
                         getStatusBadge(entry.statusCode)
                       )}
                     >
                       {entry.statusCode}
                     </span>
-                    <span className="flex items-center gap-1 text-[10px] text-gray-600">
+                    <span className="flex items-center gap-1 text-[10px] text-gray-500 bg-gray-800/50 dark:bg-gray-800/50 light:bg-gray-100 px-1.5 py-0.5 rounded-md">
                       <Clock className="w-2.5 h-2.5" />
                       {getTimeDiff(entry.timestamp)}
                     </span>
                     {!entry.matchedEndpointId && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-yellow-500/15 text-yellow-500 border border-yellow-500/30">
-                        unmatched
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-yellow-500/15 text-yellow-500 border border-yellow-500/30">
+                        ⚠ unmatched
                       </span>
                     )}
                     {Object.keys(entry.query).length > 0 && (
-                      <span className="text-[10px] text-gray-600">
+                      <span className="text-[10px] text-gray-500 bg-gray-800/40 px-1.5 py-0.5 rounded-md">
                         ?{Object.keys(entry.query).length} params
                       </span>
                     )}

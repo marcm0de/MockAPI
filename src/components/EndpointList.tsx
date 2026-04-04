@@ -138,23 +138,33 @@ export function EndpointList() {
                     </button>
                   </div>
                 </div>
-                <div className="mt-1 flex items-center gap-2">
+                <div className="mt-1.5 flex items-center gap-2">
                   <span className="text-xs text-gray-500 truncate">
                     {ep.description}
                   </span>
-                  <span className="text-xs text-gray-700">•</span>
-                  <span className="text-xs text-gray-600">{ep.statusCode}</span>
+                  <span className={cn(
+                    "text-[10px] font-medium px-1.5 py-0.5 rounded-md border",
+                    ep.statusCode < 300
+                      ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                      : ep.statusCode < 400
+                      ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20"
+                      : ep.statusCode < 500
+                      ? "bg-orange-500/10 text-orange-400 border-orange-500/20"
+                      : "bg-red-500/10 text-red-400 border-red-500/20"
+                  )}>
+                    {ep.statusCode}
+                  </span>
                   {ep.delay > 0 && (
-                    <>
-                      <span className="text-xs text-gray-700">•</span>
-                      <span className={`text-xs flex items-center gap-1 ${
-                        ep.delay <= 200 ? 'text-yellow-500' :
-                        ep.delay <= 1000 ? 'text-orange-500' :
-                        'text-red-500'
-                      }`}>
-                        ⏱ {ep.delay}ms
-                      </span>
-                    </>
+                    <span className={cn(
+                      "text-[10px] font-medium px-1.5 py-0.5 rounded-md border flex items-center gap-1",
+                      ep.delay <= 200
+                        ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
+                        : ep.delay <= 1000
+                        ? 'bg-orange-500/10 text-orange-400 border-orange-500/20'
+                        : 'bg-red-500/10 text-red-400 border-red-500/20'
+                    )}>
+                      ⏱ {ep.delay}ms
+                    </span>
                   )}
                 </div>
               </div>
